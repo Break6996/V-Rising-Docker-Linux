@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:focal
 
 ### change the system source for installing libs
 ARG USE_SRC_INSIDE=true
