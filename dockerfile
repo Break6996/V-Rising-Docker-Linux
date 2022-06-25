@@ -1,5 +1,16 @@
 FROM ubuntu
 
+### change the system source for installing libs
+ARG USE_SRC_INSIDE=true
+RUN if [ ${USE_SRC_INSIDE} == true ] ; \
+    then \
+        sed -i s/archive.ubuntu.com/mirrors.aliyun.com/g /etc/apt/sources.list ; \
+        sed -i s/security.ubuntu.com/mirrors.aliyun.com/g /etc/apt/sources.list ; \
+        echo "Use aliyun source for installing libs" ; \
+    else \
+        echo "Keep the download source unchanged" ; \
+    fi
+    
 RUN dpkg --add-architecture i386 \
     && apt update \
     && apt install -y wine64 wine32 wget unzip xvfb \
